@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
   s.frameworks = "VideoToolbox", "AudioToolbox","AVFoundation","Foundation","UIKit"
   s.libraries = "c++", "z"
-  s.dependency 'OpenSSL', '1.0.0'
+  s.dependency 'OpenSSL-Universal'
   s.requires_arc = true
 end
