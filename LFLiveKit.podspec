@@ -13,8 +13,7 @@ Pod::Spec.new do |s|
   s.source_files  = "LFLiveKit/**/*.{h,m,mm,cpp,c}"
   s.public_header_files = ['LFLiveKit/*.h', 'LFLiveKit/objects/*.h', 'LFLiveKit/configuration/*.h']
 
-  s.frameworks = "VideoToolbox", "AudioToolbox","AVFoundation","Foundation","UIKit"
+  s.frameworks = "VideoToolbox", "AudioToolbox","AVFoundation","Foundation", "UIKit", "OpenSSL"
   s.libraries = "c++", "z"
-  s.dependency 'OpenSSL-Universal'
   s.requires_arc = true
 end
