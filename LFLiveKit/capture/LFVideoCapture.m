@@ -210,9 +210,9 @@
         _warterMarkView = nil;
     }
     _warterMarkView = warterMarkView;
-    self.blendFilter.mix = warterMarkView.alpha;
+  //  self.blendFilter.mix = warterMarkView.alpha;
     [self.waterMarkContentView addSubview:_warterMarkView];
-    [self reloadFilter];
+   // [self reloadFilter];
 }
 
 - (GPUImageUIElement *)uiElementInput{
