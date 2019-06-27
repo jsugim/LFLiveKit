@@ -294,8 +294,17 @@
     if(self.saveLocalVideo) [self.blendFilter addTarget:self.movieWriter];
     [self.filter addTarget:self.output];
     [self.uiElementInput update];
-    [self processVideo:self.output];
-}
+    [self.filter forceProcessingAtSize:self.configuration.videoSize];
+    [self.output forceProcessingAtSize:self.configuration.videoSize];
+    [self.blendFilter forceProcessingAtSize:self.configuration.videoSize];
+    [self.uiElementInput forceProcessingAtSize:self.configuration.videoSize];
+    
+    
+    //< 输出数据
+    __weak typeof(self) _self = self;
+    [self.output setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
+        [_self processVideo:output];
+    }];}
 
 - (void)reloadFilter{
     [self.filter removeAllTargets];
