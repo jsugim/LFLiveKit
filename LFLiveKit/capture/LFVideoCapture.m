@@ -294,6 +294,7 @@
     if(self.saveLocalVideo) [self.blendFilter addTarget:self.movieWriter];
     [self.filter addTarget:self.output];
     [self.uiElementInput update];
+    [self processVideo:self.output];
 }
 
 - (void)reloadFilter{
