@@ -210,9 +210,9 @@
         _warterMarkView = nil;
     }
     _warterMarkView = warterMarkView;
-  //  self.blendFilter.mix = warterMarkView.alpha;
+    self.blendFilter.mix = warterMarkView.alpha;
     [self.waterMarkContentView addSubview:_warterMarkView];
-   // [self reloadFilter];
+    [self reloadWatermark];
 }
 
 - (GPUImageUIElement *)uiElementInput{
@@ -277,6 +277,23 @@
             [_self.delegate captureOutput:_self pixelBuffer:pixelBuffer];
         }
     }
+}
+
+- (void)reloadWatermark{
+    [self.filter removeAllTargets];
+    [self.blendFilter removeAllTargets];
+    [self.uiElementInput removeAllTargets];
+    [self.videoCamera removeAllTargets];
+    [self.output removeAllTargets];
+    self.output = [[LFGPUImageEmptyFilter alloc] init];
+    self.filter = [[LFGPUImageEmptyFilter alloc] init];
+    [self.videoCamera addTarget:self.filter];
+    [self.filter addTarget:self.blendFilter];
+    [self.uiElementInput addTarget:self.blendFilter];
+    [self.blendFilter addTarget:self.gpuImageView];
+    if(self.saveLocalVideo) [self.blendFilter addTarget:self.movieWriter];
+    [self.filter addTarget:self.output];
+    [self.uiElementInput update];
 }
 
 - (void)reloadFilter{
